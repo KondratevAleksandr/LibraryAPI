@@ -69,6 +69,7 @@ public class BookControllerTest {
 
     @Test
     public void shouldReturn_BookCurrentId_WhenExists() throws Exception {
+
         when(bookService.getBookById(1)).thenReturn(Optional.of(book));
 
         mockMvc.perform(get("/books/1"))

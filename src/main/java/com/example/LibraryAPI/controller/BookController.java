@@ -22,12 +22,9 @@ public class BookController {
 
     @GetMapping("/{id}")
     public ResponseEntity<Book> getBookById(@PathVariable Integer id) {
-        try {
-            Book book = bookService.getBookById(id);
-            return ResponseEntity.ok(book);
-        } catch (RuntimeException e) {
-            return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
-        }
+        return bookService.getBookById(id)
+                .map(book -> ResponseEntity.ok().body(book))
+                .orElse(ResponseEntity.notFound().build());
     }
 
     @GetMapping

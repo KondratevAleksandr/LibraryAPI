@@ -4,6 +4,7 @@ import com.example.LibraryAPI.entity.Author;
 import com.example.LibraryAPI.entity.Book;
 import com.example.LibraryAPI.repository.AuthorRepository;
 import com.example.LibraryAPI.repository.BookRepository;
+import org.springframework.beans.factory.ObjectProvider;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
@@ -20,8 +21,8 @@ public class BookService {
         this.authorRepository = authorRepository;
     }
 
-    public Book getBookById(Integer id) {
-        return bookRepository.findById(id).orElseThrow(() -> new RuntimeException("Bool not found"));
+    public Optional<Book> getBookById(Integer id) {
+        return bookRepository.findById(id);
     }
 
     public Page<Book> getAllBooks(Pageable pageable) {
